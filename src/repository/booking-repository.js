@@ -5,6 +5,7 @@ const { AppError, ValidationError} = require('../utils/errors/index');
 
 
 class BookingRepository {
+    
     async createBooking(data) {
         try {
             const booking = await Booking.create(data);
@@ -17,7 +18,7 @@ class BookingRepository {
                 'RepositoryError',
                 'Error creating booking',
                 'there was some issue creating the booking , please try again later',
-                 StatusCodes.INTERNAL_SERVER_ERROR, error);
+                 StatusCodes.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -30,20 +31,18 @@ class BookingRepository {
                 'RepositoryError',
                 'Error creating booking',
                 'there was some issue creating the booking , please try again later',
-                 StatusCodes.INTERNAL_SERVER_ERROR, error);
+                 StatusCodes.INTERNAL_SERVER_ERROR);
         }
     }
 
-    async updateBooking(id, data) {
+    async updateBooking(bookingId, data) {
         try {
-            const booking = await Booking.findByPk(id);
-            await booking.update(data);
-            return booking;
+             
         } catch (error) {
             throw new AppError(
                 'RepositoryError',
                 'Error creating booking',
-                'there was some issue creating the booking , please try again later',
+                'there was some issue updating the booking , please try again later',
                  StatusCodes.INTERNAL_SERVER_ERROR, error);
         }
     }
@@ -59,7 +58,7 @@ class BookingRepository {
                 'RepositoryError',
                 'Error creating booking',
                 'there was some issue creating the booking , please try again later',
-                 StatusCodes.INTERNAL_SERVER_ERROR, error);
+                 StatusCodes.INTERNAL_SERVER_ERROR);
         }
     }
 }
